@@ -1,13 +1,15 @@
 # ZOOLOGICO CAMPUSLANDS
-![zoo](https://www.google.com/url?sa=i&url=http%3A%2F%2Fdao.iesclaracampoamor.org%2Fjaviyjorge%2FQuienesSomos.html&psig=AOvVaw0zMD5aHm9xJA_XKsd4vHEL&ust=1691670959405000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMCY48bLz4ADFQAAAAAdAAAAABAQ)
+
+![zoo](./assets/banner.png)
 
 Un zoológico es un lugar donde animales salvajes de forma dividida por recintos. El proposito general de estos es educar a la población, dar el espacio para esparcimiento del público, estudiar y/o preservar las especies.
 
 ### ¿Cómo funciona un Zoo?
+
 La mayoria de estos funcionan por medio de **microambientes** que hacen de imitaciones del hábitat natural de los animales.
 Poseen cuidadores encargados de la alimentación, mantenimiento y atención del público. Generalmente en estos tambien se realizan eventos solicitados por visitantes usuarios del zoológico.
 
-*Por lo tanto se busca realizar un proyecto el cual permita gestionar a los animales, su alimentacion, habitats, personal empleado, eventos y visitantes.*
+_Por lo tanto se busca realizar un proyecto el cual permita gestionar a los animales, su alimentacion, habitats, personal empleado, eventos y visitantes._
 
 ## REQUERIMIENTOS
 
