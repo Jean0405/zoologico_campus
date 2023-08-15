@@ -1,6 +1,6 @@
 # ZOOLOGICO CAMPUSLANDS
 
-![zoo](./assets/banner.png)
+![zoo](./Backend/src/assets/banner.png)
 
 Un zoológico es un lugar donde animales salvajes de forma dividida por recintos. El proposito general de estos es educar a la población, dar el espacio para esparcimiento del público, estudiar y/o preservar las especies.
 
