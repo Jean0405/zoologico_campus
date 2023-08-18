@@ -1,6 +1,6 @@
 # ZOOLOGICO CAMPUSLANDS
 
-![zoo](./Backend/src/assets/banner.png)
+![zoo](./assets/banner.png)
 
 Un zoológico es un lugar donde animales salvajes de forma dividida por recintos. El proposito general de estos es educar a la población, dar el espacio para esparcimiento del público, estudiar y/o preservar las especies.
 
@@ -15,26 +15,36 @@ Finalmente, periodicamente se deben realizar chequeo medicos a los animales, tra
 
 _Por lo tanto se busca realizar un proyecto el cual permita gestionar a los animales, su alimentacion, habitats, personal empleado, eventos y visitantes._
 
+## DIAGRAMA DE LA BASE DE DATOS
+
+![diagramaDB](./assets/diagramaDB.png)
+
 ## REQUERIMIENTOS
 
 1. **Búsqueda y Filtros:**
+
    - buscar animales por especie, nombre o hábitat.
    - filtrar eventos por fecha, tipo o ubicación.
    - buscar empleados por nombre o cargo.
 
 2. **Alimentación de Animales:**
+
    - registrar la alimentación de un animal en una fecha y hora específicas.
 
 3. **Información sobre Visitantes:**
+
    - registrar la información de los visitantes, como nombre, edad, país de origen, etc.
 
 4. **Comentarios y Calificaciones:**
+
    - visitantes dejen comentarios y calificaciones sobre los animales, hábitats o eventos.
 
 5. **Estadísticas y Reportes:**
+
    - obtener estadísticas sobre los animales más populares.
 
 6. **Reservas de Eventos:**
+
    - visitantes reserven lugares en eventos específicos.
 
 7. **Autenticación y Autorización:**
