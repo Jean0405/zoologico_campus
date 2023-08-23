@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev":"nodemon --quiet ./Backend/src/app.js",
+    "dev": "nodemon --quiet ./Backend/src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,7 +14,8 @@
   "dependencies": {
     "dotenv": "16.3.1",
     "express": "4.18.2",
-    "mongodb": "5.8.0"
+    "mongodb": "5.8.0",
+    "saslprep": "^1.0.3"
   },
   "devDependencies": {
     "nodemon": "3.0.1"
