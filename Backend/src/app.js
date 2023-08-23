@@ -1,24 +1,19 @@
 console.clear();
-import dotenv from "dotenv";
+import "dotenv/config";
 import express from "express";
-
-// Cargar variables de entorno
-dotenv.config();
+import { server } from "./configuration/serverConfig.js";
+import v1Routes from "./v1/index.js";
 
 // Crear la aplicación Express
 const app = express();
 app.use(express.json());
 
 // Definir ruta raíz
-app.get("/", (req, res) => {
-  res.send("xdd");
-});
+app.use("/v1", v1Routes);
 
 // Obtener configuración del servidor desde variables de entorno
-const hostname = process.env.SERVER.HOSTNAME || "localhost";
-const port = process.env.SERVER.PORT || 3000;
 
 // Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}`);
+app.listen(server.PORT, () => {
+  console.log(`Server running at http://${server.HOSTNAME}:${server.PORT}`);
 });
