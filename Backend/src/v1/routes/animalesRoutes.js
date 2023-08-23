@@ -1,6 +1,11 @@
 import { Router } from "express";
+import * as animalesController from "../../controllers/animalesController.js";
 
-const v1Animals = Router();
+const v1Animales = Router();
 
-v1Animals.get("/", animalsController.getAllAnimals);
-export default v1Animals;
+v1Animales
+  .get("/", animalesController.getAllAnimals)
+  .get("/recinto/:recintoID", animalesController.getAnimalsByEnclosure)
+  .get("/especie/:especieID", animalesController.getAllAnimalsBySpecie)
+  .get("/:animalID", animalesController.getAnimalById);
+export default v1Animales;
