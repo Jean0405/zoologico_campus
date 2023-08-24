@@ -20,36 +20,39 @@ _Por lo tanto se busca realizar un proyecto el cual permita gestionar a los anim
 ![diagramaDB](./assets/diagramaDB.png)
 
 ## REQUERIMIENTOS
+   **Registrar:**
+   - registrar animales
+   - registrar recintos
+   - registrar cargos
+   - registrar empleados
+   - registrar actividades
+   - visitantes
+   - comentarios
 
 1. **Búsqueda y Filtros:**
 
-   - buscar animales por especie, nombre o hábitat.
-   - filtrar eventos por fecha, tipo o ubicación.
-   - buscar empleados por nombre o cargo.
+   - buscar animales por su id, especie o recinto.
+   - filtrar actividades por fecha, tipo o ubicación.
+   - buscar empleados por su tipo, recinto o empleado.
 
-2. **Alimentación de Animales:**
+2. **Información sobre Visitantes:**
 
-   - registrar la alimentación de un animal en una fecha y hora específicas.
+   - registrar la información de los visitantes del zoológico.
 
-3. **Información sobre Visitantes:**
+3. **Comentarios y Calificaciones:**
 
-   - registrar la información de los visitantes, como nombre, edad, país de origen, etc.
+   - visitantes dejen comentarios y calificaciones sobre los animales.
 
-4. **Comentarios y Calificaciones:**
-
-   - visitantes dejen comentarios y calificaciones sobre los animales, hábitats o eventos.
-
-5. **Estadísticas y Reportes:**
+4. **Estadísticas y Reportes:**
 
    - obtener estadísticas sobre los animales más populares.
 
-6. **Reservas de Eventos:**
+5. **Reservas de Eventos:**
 
-   - visitantes reserven lugares en eventos específicos.
+   - Zoológico registrar actividades diarias del zoológico.
 
-7. **Autenticación y Autorización:**
-   - registro de usuarios.
-   - Asegurar que ciertas acciones (como editar o eliminar registros) solo sean accesibles para usuarios autorizados.
+6. **Autenticación y Autorización:**
+   - Asegurar que ciertos endpoints solo sean accesibles para empleados autorizados.
 
 ## LENGUAJES A UTILIZAR
 
