@@ -6,8 +6,7 @@ db.contadores.insertMany([
     {ID:"recintosID", sequence_value:0},
     {ID:"tipoHabitatID", sequence_value:0},
     {ID:"actividadesID", sequence_value:0},
-    {ID:"tipoActividad", sequence_value:0},
-    {ID:"tipoCargoID", sequence_value:0},
+    {ID:"tipoActividadID", sequence_value:0},
     {ID:"comentariosID", sequence_value:0},
     {ID:"especieID", sequence_value:0}
 ]);
@@ -96,9 +95,9 @@ db.createCollection("especie",{
                 },
                 nombre: {
                     bsonType: "string",
-                    maxLength: 50,
+                    maxLength: 30,
                     pattern: "^[a-zA-Z\s]+$",
-                    description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
+                    description: "El campo 'nombre' debe ser un string y no sobrepasar [30]caracteres"
                 }
             }
         }
@@ -295,7 +294,7 @@ db.createCollection("empleado",{
         $jsonSchema:{
             bsonType: "object",
             additionalProperties: false,
-            required: ["numDocumento", "nombre", "tipoCargo", "telefono"],
+            required: ["numDocumento", "nombre", "cargo", "telefono", "email", "password"],
             properties:{
                 _id:{
                     bsonType: 'objectId',
@@ -313,20 +312,19 @@ db.createCollection("empleado",{
                     pattern: "^[a-zA-Z\s]+$",
                     description: "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres"
                 },
-                tipoCargo: {
+                cargo: {
                     bsonType: "object",
                     additionalProperties: false,
-                    required: ["ID","nombre"],
+                    required: ["nombre", "permisos"],
                     properties:{
-                        ID: {
-                            bsonType: "int",
-                            description: "El campo 'ID' debe ser un int"
-                        },
                         nombre: {
                             bsonType: "string",
                             maxLength: 50,
                             pattern: "^[a-zA-Z\s]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
+                        },
+                        permisos: {
+                            bsonType: "array"
                         }
                     }
                 },
@@ -335,37 +333,18 @@ db.createCollection("empleado",{
                     maxLength: 10,
                     pattern: "^[0-9]+$",
                     description: "El campo 'telefono' debe ser un string, solo acepta numero y no sobrepasar [10]caracteres"
-                }
-            }
-        }
-    }
-});
-
-use("db_zoologico_campus");
-db.createCollection("tipoCargo",{
-    validator: {
-        $jsonSchema:{
-            bsonType: "object",
-            additionalProperties: false,
-            required: ["nombre"],
-            properties:{
-                _id:{
-                    bsonType: 'objectId',
                 },
-                ID: {
-                    bsonType: "int",
-                },
-                nombre: {
+                email: {
                     bsonType: "string",
                     maxLength: 60,
-                    pattern: "^[a-zA-Z\s]+$",
-                    description: "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres"
+                    pattern: "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑüÜ,.#_@\\s-]+$",
+                    description: "El campo 'email' debe ser un string y no sobrepasar [60] caracteres",
                 },
-                descripcion: {
+                password: {
                     bsonType: "string",
-                    maxLength: 300,
-                    description: "El campo 'descripcion' debe ser un string y no sobrepasar [300]caracteres"
-                },
+                    maxLength: 20,
+                    description: "El campo 'telefono' debe ser un string, solo acepta numero y no sobrepasar [10] caracteres"
+                }
             }
         }
     }
@@ -433,13 +412,17 @@ db.createCollection("comentarios",{
                 especieDestacado: {
                     bsonType: "object",
                     additionalProperties: false,
-                    required: ["ID","especie"],
+                    required: ["ID","nombre"],
                     properties:{
                         ID: {
                             bsonType: "int",
                             description: "El campo 'ID' debe ser un int"
                         },
                         nombre: {
+                            bsonType: "string",
+                            maxLength: 30,
+                            pattern: "^[a-zA-Z\s]+$",
+                            description: "El campo 'nombre' debe ser un string y no sobrepasar [30]caracteres"
                             }
                     }
                 },
