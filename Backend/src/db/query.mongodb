@@ -37,7 +37,7 @@ db.createCollection("animales",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 50,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
                         }
                     }
@@ -96,7 +96,7 @@ db.createCollection("especie",{
                 nombre: {
                     bsonType: "string",
                     maxLength: 30,
-                    pattern: "^[a-zA-Z\s]+$",
+                    pattern: "^[a-zA-Z ]+$",
                     description: "El campo 'nombre' debe ser un string y no sobrepasar [30]caracteres"
                 }
             }
@@ -145,7 +145,7 @@ db.createCollection("recintos",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 50,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
                         }
                     }
@@ -172,7 +172,7 @@ db.createCollection("tipoHabitat",{
                 nombre: {
                     bsonType: "string",
                     maxLength: 50,
-                    pattern: "^[a-zA-Z\s]+$",
+                    pattern: "^[a-zA-Z ]+$",
                     description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
                 },
                 descripcion: {
@@ -211,7 +211,7 @@ db.createCollection("actividades",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 50,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
                         }
                     }
@@ -253,7 +253,7 @@ db.createCollection("actividades",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 60,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres"
                         }
                     }
@@ -280,7 +280,7 @@ db.createCollection("tipoActividad",{
                 nombre: {
                     bsonType: "string",
                     maxLength: 50,
-                    pattern: "^[a-zA-Z\s]+$",
+                    pattern: "^[a-zA-Z ]+$",
                     description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
                 }
             }
@@ -299,9 +299,6 @@ db.createCollection("empleado",{
                 _id:{
                     bsonType: 'objectId',
                 },
-                ID: {
-                    bsonType: "int",
-                },
                 numDocumento: {
                     bsonType: "int",
                     description: "El campo 'numDocumento' debe ser un int y no sobre pasar los 11 caracteres"
@@ -309,7 +306,7 @@ db.createCollection("empleado",{
                 nombre: {
                     bsonType: "string",
                     maxLength: 60,
-                    pattern: "^[a-zA-Z\s]+$",
+                    pattern: "^[a-zA-Z ]+$",
                     description: "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres"
                 },
                 cargo: {
@@ -320,7 +317,7 @@ db.createCollection("empleado",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 50,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres"
                         },
                         permisos: {
@@ -361,9 +358,6 @@ db.createCollection("visitantes",{
                 _id:{
                     bsonType: 'objectId',
                 },
-                ID: {
-                    bsonType: "int",
-                },
                 numDocumento: {
                     bsonType: "int",
                     description: "El campo 'numDocumento' debe ser un int y no sobre pasar los 11 caracteres"
@@ -371,7 +365,7 @@ db.createCollection("visitantes",{
                 nombre: {
                     bsonType: "string",
                     maxLength: 60,
-                    pattern: "^[a-zA-Z\s]+$",
+                    pattern: "^[a-zA-Z ]+$",
                     description: "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres"
                 },
                 edad: {
@@ -383,7 +377,7 @@ db.createCollection("visitantes",{
                 pais: {
                     bsonType: "string",
                     maxLength: 30,
-                    pattern: "^[a-zA-Z\s]+$",
+                    pattern: "^[a-zA-Z ]+$",
                     description: "El campo 'pais' debe ser un string y no sobrepasar [30]caracteres"
                 },
                 fecha_visita: {
@@ -421,7 +415,7 @@ db.createCollection("comentarios",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 30,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [30]caracteres"
                             }
                     }
@@ -449,7 +443,7 @@ db.createCollection("comentarios",{
                         nombre: {
                             bsonType: "string",
                             maxLength: 60,
-                            pattern: "^[a-zA-Z\s]+$",
+                            pattern: "^[a-zA-Z ]+$",
                             description: "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres"
                         }
                     }
@@ -491,7 +485,7 @@ db.createCollection("comentarios",{
 //tipoHabitat
 // use("db_zoologico_campus");
 // db.tipoHabitat.insertOne({
-//     nombre: "savanas",
+//     nombre: "Savana",
 //     descripcion: "EL mejor habitat para los animales terrestres"
 // });
 
@@ -517,7 +511,7 @@ db.createCollection("comentarios",{
 //tipoActividad
 // use("db_zoologico_campus");
 // db.tipoActividad.insertOne({
-//     nombre: "Alimentacion",
+//     nombre: "Alimentar",
 // });
 
 //EMPLEADO
@@ -525,11 +519,13 @@ db.createCollection("comentarios",{
 // db.empleado.insertOne({
 //     numDocumento:1004952256,
 //     nombre: "Carlos Villafrades",
-//     tipoCargo:{
-//         ID:1,
-//         nombre:"Cuidador"
+//     cargo:{
+//         nombre:"Cuidador",
+//         permisos: ["*"]
 //     },
 //     telefono: "3238884306",
+//     email: "cavillafrades@gmail.com",
+//     password: "asdcdf"
 // });
 
 
