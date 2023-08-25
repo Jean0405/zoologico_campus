@@ -71,3 +71,22 @@ export const getAnimalById = async (req, res) => {
     });
   }
 };
+
+export const postNewAnimal = async (req, res) => {
+  try {
+    await animalesService.postNewAnimal(req.body);
+    res.status(200).send({
+      status: 200,
+      message: "DATOS GUARDADOS CORRECTAMENTE",
+      data: req.body,
+    });
+  } catch (error) {
+    res.status(500).send({
+      status: 500,
+      errorInfo: {
+        message: "ERROR AL GUARDAR LOS DATOS",
+        error: error.message,
+      },
+    });
+  }
+};

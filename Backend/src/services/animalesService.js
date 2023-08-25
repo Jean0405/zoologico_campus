@@ -31,3 +31,10 @@ export const getAnimalById = async (animalID) => {
   let data = await collection.find({ ID: Number(animalID) }).toArray();
   return data;
 };
+
+export const postNewAnimal = async (nuevoAnimal) => {
+  let db = await connDB();
+  let collection = db.collection("animales");
+  await collection.insertOne(nuevoAnimal);
+  return;
+};
