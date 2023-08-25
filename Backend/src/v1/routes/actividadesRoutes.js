@@ -1,11 +1,12 @@
 import { Router } from "express";
-import * as animalesController from "../../controllers/actividadesController.js";
+import * as actividadesController from "../../controllers/actividadesController.js";
 const v1Actividades = Router();
 
 v1Actividades
-  .get("/", animalesController.getAllActivities)
-  .get("/tipoIdb/:tipoID", animalesController.getActivitiesByType)
-  .get("/fecha/:fecha", animalesController.getActivitiesByDate)
-  .get("/recinto/:recintoID", animalesController.getActivityByClousure);
+  .get("/", actividadesController.getAllActivities)
+  .get("/tipoIdb/:tipoID", actividadesController.getActivitiesByType)
+  .get("/fecha/:fecha", actividadesController.getActivitiesByDate)
+  .get("/recinto/:recintoID", actividadesController.getActivityByClousure)
+  .post("/", actividadesController.postNewActivity);
 
 export default v1Actividades;

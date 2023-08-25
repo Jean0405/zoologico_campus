@@ -77,3 +77,22 @@ export const getActivityByClousure = async (req, res) => {
     });
   }
 };
+
+export const postNewActivity = async (req, res) => {
+  try {
+    let data = await actividadesService.postNewActivity(req.body);
+    res.status(200).send({
+      status: 200,
+      message: "DATOS GUARDADOS CORRECTAMENTE",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).send({
+      status: 500,
+      errorInfo: {
+        message: "ERROR AL GUARDAR LOS DATOS",
+        error: error.message,
+      },
+    });
+  }
+};

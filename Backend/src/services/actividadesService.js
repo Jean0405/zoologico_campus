@@ -17,7 +17,11 @@ export const getActivitiesByType = async (tipoID) => {
 export const getActivitiesByDate = async (fecha) => {
   let db = await connDB();
   let collection = db.collection("actividades");
-  let data = collection.find({ fecha: new Date(fecha) }).toArray();
+
+  const currentDate = new Date(fecha);
+  currentDate.setUTCHours(0, 0, 0, 0);
+
+  let data = collection.find({ fecha: currentDate }).toArray();
   return data;
 };
 
@@ -25,5 +29,21 @@ export const getActivityByClousure = async (recintoID) => {
   let db = await connDB();
   let collection = db.collection("actividades");
   let data = collection.find({ "recinto.ID": Number(recintoID) }).toArray();
+  return data;
+};
+
+export const postNewActivity = async (nuevaActividad) => {
+  let db = await connDB();
+  let collection = db.collection("actividades");
+
+  const fecha = new Date();
+  fecha.setUTCHours(0, 0, 0, 0);
+
+  let data = {
+    ...nuevaActividad,
+    fecha,
+  };
+
+  await collection.insertOne(data);
   return data;
 };
