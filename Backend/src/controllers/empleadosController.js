@@ -39,12 +39,6 @@ export const getEmployeesByRole = async (req, res) => {
 export const getEmployeeById = async (req, res) => {
   try {
     let data = await empleadosService.getEmployeeById(req.params.empleadoID);
-    if (!data[0])
-      res.status(404).send({
-        status: 404,
-        message: "EMPLEADO NO ENCONTRADO",
-        search_parameter: Number(req.params.empleadoID),
-      });
 
     res
       .status(200)
@@ -54,6 +48,25 @@ export const getEmployeeById = async (req, res) => {
       status: 500,
       errorInfo: {
         message: "ERROR AL OBTENER LOS DATOS",
+        error: error.message,
+      },
+    });
+  }
+};
+
+export const postNewEmployee = async (req, res) => {
+  try {
+    await empleadosService.postNewEmployee(req.body);
+    res.status(200).send({
+      status: 200,
+      message: "DATOS GUARDADOS CORRECTAMENTE",
+      data: req.body,
+    });
+  } catch (error) {
+    res.status(500).send({
+      status: 500,
+      errorInfo: {
+        message: "ERROR AL GUARDAR LOS DATOS",
         error: error.message,
       },
     });

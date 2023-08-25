@@ -24,3 +24,10 @@ export const getEmployeeById = async (empleadoID) => {
 
   return data;
 };
+
+export const postNewEmployee = async (nuevoEmpleado) => {
+  let db = await connDB();
+  let collection = db.collection("empleado");
+  await collection.insertOne(nuevoEmpleado);
+  return;
+};
