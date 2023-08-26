@@ -490,15 +490,29 @@ db.createCollection("comentarios", {
   },
 });
 
-//ANIMALES
+//AGREGAR DATOS
+//Importante tener en cuenta que cada vez que queramos agregar registros desde este archivo debemos seleccionar tambien la funcion de increment para que se agregue por defecto el ID.
+
+//Funcion IDAutoIncrementable
 // use("db_zoologico_campus");
+// function autoIncrementID(coleccion) {
+//     const sequenceDocument = db.contadores.findOneAndUpdate(
+//         { ID: `${coleccion}ID` },
+//         { $inc: {sequence_value: 1} },
+//         { returnDocument: "after" }
+//     );
+//     return sequenceDocument.sequence_value;
+// }
+
+//ANIMALES
 // db.animales.insertOne({
+//     ID:autoIncrementID("animales"),
 //     especie: {
 //         ID:1,
 //         nombre: "jaguar"
 //     },
 //     nombre: "el mejor",
-//     edad: 500,
+//     edad: 2,
 //     recinto: {
 //         ID:1,
 //         nombre: "Savana"
@@ -509,6 +523,7 @@ db.createCollection("comentarios", {
 //RECINTOS
 // use("db_zoologico_campus");
 // db.recintos.insertOne({
+//     ID:autoIncrementID("recintos"),
 //     nombre: "parque acuatico",
 //     descripcion: "en el parque acuatico podras encontrar animales acuaticos",
 //     zona:"norte",
@@ -521,6 +536,7 @@ db.createCollection("comentarios", {
 //tipoHabitat
 // use("db_zoologico_campus");
 // db.tipoHabitat.insertOne({
+//     ID:autoIncrementID("tipoHabitat"),
 //     nombre: "Savana",
 //     descripcion: "EL mejor habitat para los animales terrestres"
 // });
@@ -528,6 +544,7 @@ db.createCollection("comentarios", {
 //ACTIVIDADES
 // use("db_zoologico_campus");
 // db.actividades.insertOne({
+//     ID:autoIncrementID("actividades"),
 //     tipoActividad: {
 //         ID:1,
 //         nombre: "Alimentacion"
@@ -547,12 +564,13 @@ db.createCollection("comentarios", {
 //tipoActividad
 // use("db_zoologico_campus");
 // db.tipoActividad.insertOne({
+//     ID:autoIncrementID("tipoActividad"),  
 //     nombre: "Alimentar",
 // });
 
 //EMPLEADO
 // use("db_zoologico_campus");
-// db.empleado.insertOne({
+// db.empleado.insertOne({ 
 //     numDocumento:1004952256,
 //     nombre: "Carlos Villafrades",
 //     cargo:{
