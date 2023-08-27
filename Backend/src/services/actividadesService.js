@@ -1,4 +1,5 @@
 import { connDB } from "../db/connectDB.js";
+import { autoIncrementID } from "../helpers/idAutoIncrement.js";
 
 export const getAllActivities = async () => {
   let db = await connDB();
@@ -33,6 +34,8 @@ export const getActivityByClousure = async (recintoID) => {
 };
 
 export const postNewActivity = async (nuevaActividad) => {
+  const newId = await autoIncrementID("actividades")
+
   let db = await connDB();
   let collection = db.collection("actividades");
 
@@ -40,6 +43,7 @@ export const postNewActivity = async (nuevaActividad) => {
   fecha.setUTCHours(0, 0, 0, 0);
 
   let data = {
+    ID: newId,
     ...nuevaActividad,
     fecha,
   };
