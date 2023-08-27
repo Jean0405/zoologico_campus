@@ -1,7 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 
 export const generateToken = async (info) => {
-  // const { ID, role } = result[0];
   let infoToken = {
     ID: info[0].numDocumento,
     nombre: info[0].nombre,
@@ -18,5 +17,25 @@ export const generateToken = async (info) => {
     .setIssuedAt()
     .setExpirationTime("3h")
     .sign(encoder.encode(process.env.PRIVATE_KEY));
+
   return jwt;
+};
+
+export const validateToken = async (req, res, next) => {
+  const { authorization } = req.headers;
+  if (!authorization)
+    return res.status(401).send({ token: "NON-EXISTENT OR EXPIRED TOKEN" });
+  try {
+    const encoder = new TextEncoder();
+    req.auth = await jwtVerify(
+      authorization,
+      encoder.encode(process.env.PRIVATE_KEY)
+    );
+    next();
+  } catch (error) {
+    res.status(401).send({
+      status: 401,
+      errorInfo: { message: "Error de validación", error: error },
+    });
+  }
 };
