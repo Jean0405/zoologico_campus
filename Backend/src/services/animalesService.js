@@ -1,4 +1,5 @@
 import { connDB } from "../db/connectDB.js";
+import { autoIncrementID } from "../helpers/idAutoIncrement.js";
 
 export const getAllAnimals = async () => {
   let db = await connDB();
@@ -33,8 +34,13 @@ export const getAnimalById = async (animalID) => {
 };
 
 export const postNewAnimal = async (nuevoAnimal) => {
+  const newId = await autoIncrementID("animales")
+  
   let db = await connDB();
   let collection = db.collection("animales");
-  await collection.insertOne(nuevoAnimal);
+  await collection.insertOne({
+    ID: newId,
+    ...nuevoAnimal
+  });
   return;
 };

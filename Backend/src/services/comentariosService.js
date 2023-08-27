@@ -1,4 +1,5 @@
 import { connDB } from "../db/connectDB.js";
+import { autoIncrementID } from "../helpers/idAutoIncrement.js";
 
 export const getMostPopularAnimalsByDays = async (nDias) => {
   let db = await connDB();
@@ -67,6 +68,8 @@ export const getCommentByDate = async (fecha) => {
 };
 
 export const postNewComment = async (nuevoComentario) => {
+  const newId = await autoIncrementID("comentarios")
+  
   let db = await connDB();
   let collection = db.collection("comentarios");
 
@@ -74,6 +77,7 @@ export const postNewComment = async (nuevoComentario) => {
   fecha.setUTCHours(0, 0, 0, 0);
 
   let data = {
+    ID: newId,
     ...nuevoComentario,
     fecha: fecha,
   };
