@@ -1,17 +1,21 @@
 console.clear();
 import "dotenv/config";
 import express from "express";
+import routesVersioning from "express-routes-versioning";
 import { server } from "./configuration/serverConfig.js";
 import v1Routes from "./v1/index.js";
 
 // Crear la aplicación Express
 const app = express();
+const version = routesVersioning();
 app.use(express.json());
 
-// Definir ruta raíz
-app.use("/v1", v1Routes);
-
-// Obtener configuración del servidor desde variables de entorno
+app.use(
+  "/",
+  version({
+    "~1.0.0": v1Routes,
+  })
+);
 
 // Iniciar el servidor
 app.listen(server.PORT, () => {
