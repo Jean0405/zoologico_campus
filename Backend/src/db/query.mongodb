@@ -496,88 +496,161 @@ db.createCollection("comentarios", {
 //Funcion IDAutoIncrementable
 // use("db_zoologico_campus");
 // function autoIncrementID(coleccion) {
-//     const sequenceDocument = db.contadores.findOneAndUpdate(
-//         { ID: `${coleccion}ID` },
-//         { $inc: {sequence_value: 1} },
-//         { returnDocument: "after" }
-//     );
-//     return sequenceDocument.sequence_value;
+//   const sequenceDocument = db.contadores.findOneAndUpdate(
+//     { ID: `${coleccion}ID` },
+//     { $inc: { sequence_value: 1 } },
+//     { returnDocument: "after" }
+//   );
+//   return sequenceDocument.sequence_value;
 // }
 
 //ANIMALES
-// db.animales.insertOne({
-//     ID:autoIncrementID("animales"),
-//     especie: {
-//         ID:1,
-//         nombre: "jaguar"
-//     },
-//     nombre: "el mejor",
-//     edad: 2,
-//     recinto: {
-//         ID:1,
-//         nombre: "Savana"
-//     },
-//     tipoAlimentacion: "carnívoro"
-// });
+use("db_zoologico_campus");
+db.animales.insertMany([
+  {
+    ID: 1,
+    especie: {
+      ID: 2,
+      nombre: "delfines",
+    },
+    edad: 1,
+    recinto: {
+      ID: 2,
+      nombre: "delfinario",
+    },
+    tipoAlimentacion: "carnívoro",
+  },
+  {
+    ID: 2,
+    especie: {
+      ID: 1,
+      nombre: "leones",
+    },
+    nombre: "El rey Charles",
+    edad: 5,
+    recinto: {
+      ID: 1,
+      nombre: "savana",
+    },
+    tipoAlimentacion: "carnívoro",
+  },
+  {
+    ID: 3,
+    especie: {
+      ID: 3,
+      nombre: "simios",
+    },
+    edad: 8,
+    recinto: {
+      ID: 3,
+      nombre: "selva tropical",
+    },
+    tipoAlimentacion: "omnívoro",
+  },
+]);
 
-//RECINTOS
-// use("db_zoologico_campus");
-// db.recintos.insertOne({
-//     ID:autoIncrementID("recintos"),
-//     nombre: "parque acuatico",
-//     descripcion: "en el parque acuatico podras encontrar animales acuaticos",
-//     zona:"norte",
-//     tipoHabitat:{
-//         ID:1,
-//         nombre: "rio"
-//     }
-// });
+//ACTIVIDADES;
+use("db_zoologico_campus");
+db.actividades.insertMany([
+  {
+    ID: 1,
+    tipoActividad: {
+      ID: 2,
+      nombre: "show",
+    },
+    recinto: {
+      ID: 2,
+      nombre: "delfinario",
+    },
+    descripcion:
+      "Se realizo un show de delfines en el recinto de delfines DELFINARIO",
+    fecha: new Date("2023-05-15"),
+    empleado: {
+      numDocumento: 1005371555,
+      nombre: "Sara Angarita",
+    },
+  },
+  {
+    ID: 2,
+    tipoActividad: {
+      ID: 1,
+      nombre: "alimentacion",
+    },
+    recinto: {
+      ID: 1,
+      nombre: "savana",
+    },
+    descripcion: "alimentar los leones",
+    fecha: new Date("2023-11-05"),
+    empleado: {
+      numDocumento: 1234567890,
+      nombre: "William Angarita",
+    },
+  },
+  {
+    ID: 3,
+    tipoActividad: {
+      ID: 3,
+      nombre: "mantenimiento",
+    },
+    recinto: {
+      ID: 3,
+      nombre: "selva tropical",
+    },
+    descripcion: "se siembra nueva vegetación en el recinto",
+    fecha: new Date("2023-09-02"),
+    empleado: {
+      numDocumento: 1005371571,
+      nombre: "Cristian Diaz",
+    },
+  },
+]);
 
-//tipoHabitat
-// use("db_zoologico_campus");
-// db.tipoHabitat.insertOne({
-//     ID:autoIncrementID("tipoHabitat"),
-//     nombre: "Savana",
-//     descripcion: "EL mejor habitat para los animales terrestres"
-// });
-
-//ACTIVIDADES
-// use("db_zoologico_campus");
-// db.actividades.insertOne({
-//     ID:autoIncrementID("actividades"),
-//     tipoActividad: {
-//         ID:1,
-//         nombre: "Alimentacion"
-//     },
-//     recinto: {
-//         ID:1,
-//         nombre: "savanata"
-//     },
-//     descripcion: "alimentar los elefantes",
-//     fecha: new Date("2023-11-05"),
-//     empleado:{
-//         numDocumento:1785344957,
-//         nombre: "carlos villafrades"
-//     }
-// });
-
-//tipoActividad
-// use("db_zoologico_campus");
-// db.tipoActividad.insertOne({
-//     ID:autoIncrementID("tipoActividad"),  
-//     nombre: "Alimentar",
-// });
-
-//EMPLEADO
-// use("db_zoologico_campus");
-// db.empleado.insertOne({ 
-//     numDocumento:1004952256,
-//     nombre: "Carlos Villafrades",
-//     cargo:{
-//         nombre:"Cuidador",
-//         permisos: ["*"]
-//     },
-//     telefono: "3238884306",
-//     email: "cavillafrades@gmail.com",
-//     password: "asdcdf"
-// });
+// EMPLEADO
+use("db_zoologico_campus");
+db.empleado.insertMany([
+  {
+    numDocumento: 1004952256,
+    nombre: "Carlos Villafrades",
+    cargo: {
+      nombre: "gerente",
+      permisos: ["*"],
+    },
+    telefono: "3238884306",
+    email: "cavillafrades@gmail.com",
+    password: "carlos123",
+  },
+  {
+    numDocumento: 1005371571,
+    nombre: "Cristian Diaz",
+    cargo: {
+      nombre: "mantenimiento",
+      permisos: ["actividades"],
+    },
+    telefono: "3123123121",
+    email: "cristian@gmail.com",
+    password: "cristian123",
+  },
+  {
+    numDocumento: 1234567890,
+    nombre: "William Angarita",
+    cargo: {
+      nombre: "cuidador",
+      permisos: ["animales", "actividades"],
+    },
+    telefono: "3124261084",
+    email: "william@gmail.com",
+    password: "williampwd",
+  },
+  {
+    numDocumento: 1005371555,
+    nombre: "Sara Angarita",
+    cargo: {
+      nombre: "entrenador",
+      permisos: ["animales", "actividades"],
+    },
+    telefono: "3123123121",
+    email: "cristian@gmail.com",
+    password: "cristian123",
+  },
+]);
