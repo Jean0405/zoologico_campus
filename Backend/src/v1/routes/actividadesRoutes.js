@@ -1,5 +1,11 @@
 import { Router } from "express";
+//CONTROLLERS
 import * as actividadesController from "../../controllers/actividadesController.js";
+// MIDDLEWARE VALIDADOR DE ESQUEMAS
+import { validateSchema } from "../../helpers/validateSchema.js";
+// ESQUEMAS
+import { actividadSchema } from "../../middlewares/actividadSchema.js";
+
 const v1Actividades = Router();
 
 v1Actividades
@@ -7,6 +13,10 @@ v1Actividades
   .get("/tipoIdb/:tipoID", actividadesController.getActivitiesByType)
   .get("/fecha/:fecha", actividadesController.getActivitiesByDate)
   .get("/recinto/:recintoID", actividadesController.getActivityByClousure)
-  .post("/", actividadesController.postNewActivity);
+  .post(
+    "/",
+    validateSchema(actividadSchema),
+    actividadesController.postNewActivity
+  );
 
 export default v1Actividades;
