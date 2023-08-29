@@ -9,13 +9,13 @@ export const limitLogin = () =>{
       message: (req,res) =>{
           res.status(429).send({
               status: 429,
-              message: "alcanzo el limite de peticiones"
+              message: "Se alcanzo el limite de intentos para poder iniciar session"
           })
       }
   })
 }
 
-export const limitUsuario = ()=>{
+export const limitPeticiones = ()=>{
   return rateLimit({
       windowMs: 30 * 1000,
       max: 15,
@@ -23,7 +23,7 @@ export const limitUsuario = ()=>{
       legacyHeaders: false, 
       message: (req,res)=>{
           res.status(429).send({
-              message: "alcanzo el limite de peticiones"
+              message: "Se alcanzo el limite de peticiones"
           });
       }
   })    
