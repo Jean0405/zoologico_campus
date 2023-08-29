@@ -429,7 +429,7 @@ db.createCollection("comentarios", {
     $jsonSchema: {
       bsonType: "object",
       additionalProperties: false,
-      required: ["calificacion ", "visitante"],
+      required: ["calificacion", "visitante", "fecha"],
       properties: {
         _id: {
           bsonType: "objectId",
@@ -465,7 +465,7 @@ db.createCollection("comentarios", {
           bsonType: "int",
           minimum: 1,
           maximum: 5,
-          description: "El campo 'edad' debe ser un int entre[1-5]",
+          description: "El campo 'calificacion' debe ser un int entre[1-5]",
         },
         visitante: {
           bsonType: "object",
@@ -484,6 +484,10 @@ db.createCollection("comentarios", {
                 "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres",
             },
           },
+        },
+        fecha: {
+          bsonType: "date",
+          description: "El campo 'fecha' tipo date",
         },
       },
     },
@@ -505,6 +509,19 @@ db.createCollection("comentarios", {
 // }
 
 //ANIMALES
+use("db_zoologico_campus");
+db.comentarios.insertOne({
+  ID: 1,
+  especieDestacado: { ID: 2, nombre: "delfines" },
+  contenido: "SUPER SITIO",
+  calificacion: 5,
+  visitante: {
+    numDocumento: 1005184201,
+    nombre: "Keanon Angarita Olarte",
+  },
+  fecha: new Date("2023-10-10"),
+});
+
 use("db_zoologico_campus");
 db.animales.insertMany([
   {
