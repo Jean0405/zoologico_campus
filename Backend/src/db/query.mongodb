@@ -85,32 +85,6 @@ db.createCollection("animales", {
 });
 
 use("db_zoologico_campus");
-db.createCollection("especie", {
-  validator: {
-    $jsonSchema: {
-      bsonType: "object",
-      additionalProperties: false,
-      required: ["nombre"],
-      properties: {
-        _id: {
-          bsonType: "objectId",
-        },
-        ID: {
-          bsonType: "int",
-        },
-        nombre: {
-          bsonType: "string",
-          maxLength: 30,
-          pattern: "^[a-zA-Z ]+$",
-          description:
-            "El campo 'nombre' debe ser un string y no sobrepasar [30]caracteres",
-        },
-      },
-    },
-  },
-});
-
-use("db_zoologico_campus");
 db.createCollection("recintos", {
   validator: {
     $jsonSchema: {
@@ -159,38 +133,6 @@ db.createCollection("recintos", {
                 "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
             },
           },
-        },
-      },
-    },
-  },
-});
-
-use("db_zoologico_campus");
-db.createCollection("tipoHabitat", {
-  validator: {
-    $jsonSchema: {
-      bsonType: "object",
-      additionalProperties: false,
-      required: ["nombre"],
-      properties: {
-        _id: {
-          bsonType: "objectId",
-        },
-        ID: {
-          bsonType: "int",
-        },
-        nombre: {
-          bsonType: "string",
-          maxLength: 50,
-          pattern: "^[a-zA-Z ]+$",
-          description:
-            "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
-        },
-        descripcion: {
-          bsonType: "string",
-          maxLength: 200,
-          description:
-            "El campo 'descripcion' debe ser un string y no sobrepasar [200]caracteres",
         },
       },
     },
@@ -274,32 +216,6 @@ db.createCollection("actividades", {
                 "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres",
             },
           },
-        },
-      },
-    },
-  },
-});
-
-use("db_zoologico_campus");
-db.createCollection("tipoActividad", {
-  validator: {
-    $jsonSchema: {
-      bsonType: "object",
-      additionalProperties: false,
-      required: ["nombre"],
-      properties: {
-        _id: {
-          bsonType: "objectId",
-        },
-        ID: {
-          bsonType: "int",
-        },
-        nombre: {
-          bsonType: "string",
-          maxLength: 50,
-          pattern: "^[a-zA-Z ]+$",
-          description:
-            "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
         },
       },
     },
