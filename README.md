@@ -66,13 +66,15 @@ git clone https://github.com/Jean0405/zoologico_campus.git
 
 #### ⚠️ _Recuerda implementar tus propias variables de entorno_ ⚠️
 
+**NOTA**: Aunque la db debe llamarse "**_db_zoologico_campus_**", ya que es así como se llama la DB al ejecutar el archivo que crea las colecciones, sus schemas y algunos documentos ed ejemplo para las pruebas
+
 ```env
 PORT=3300
 HOST=127.25.25.27
 
 USERS=
 PASSWORD=
-DB=
+DB="db_zoologico_campus"
 
 PRIVATE_KEY=
 ```
@@ -87,14 +89,165 @@ Al clonar, podrás ejecutar del archivo **db/query.mongodb** para crear, relacio
 npm run dev
 ```
 
-# USO DE LA REST API
+# INDICACIONES
 
-## LOGIN
+### 🪪 INICIO DE SESIÓN Y REGISTRO
 
-## TOKENS
+- Los empleados deberán **iniciar sesión** para poder utilizar los endpoints relacionados al manejos y gestión interno del zoológico.
 
-## PERMISOS
+- Pero para poder iniciar sesíon, el empleado debio haber sido **ingresado** en la base de datos por algún otro empleado con el permiso correspondiente para dicha acción.
 
+**NOTA**: Debe haber un empleado ya registrado con el permiso de **_admin_** o con permiso para **_empleados_** que es la seccíon donde se registran los nuevos trabajdores del zoológico en la DB.
+
+### 🎫 TOKENS
+
+- Cuando ya te has registrado e iniciado sesión, obtendrás un **TOKEN** el cual te permitira estar identificado por la aplicación y entrar en ella.
+
+**NOTA**: Una vez obtienes un token debes ponerlo en el **_HEADER_** de las solicitudes, por ejemplo:
+
+Authorization: **tu_Token_Obtenido**
+![Authorization Header](image.png)
+
+### 🛂 PERMISOS
+
+Una vez que el Admin o algun empleado con permiso para registrarte lo haya hecho y hayas INICIADO SESIÓN, el token es el que indicará si tienes acceso a cierto endpoint o no. Es decir, el token posee información a cerca de tus permisos en el zoológio.
+
+- **[ * ]** ➡️ acceso a **todos** los endpoints, sin restricción alguna.
+
+**_NOTA_**: Por defecto, al crearse la base de datos ya debe existir un empleado con dicho permiso.
+
+```json
+/* POR DEFECTO, EL ADMIN ES EL PRIMERO CON ESTOS PERMISOS. POR LO TANTO ES QUIEN REGISTRA EN LA DB A LOS PRIMEROS EMPLEADOS*/
+
+// Ejemplo para LOG IN del [admin]
+{
+  "email": "cavillafrades@gmail.com",
+  "password": "carlos123"
+}
+```
+
+- **[ empleados ]** ➡️ acceso a los endpoints de **empleados**, este permite registrar a nuevos trabajadores y listar información a cerca de los mismos.
+
+- **[ actividades ]** ➡️ accesos a los endpoints de **actividades**, los cuales permiten registrar y listar las mismas.
+
+- **[ animales ]** ➡️ accesos a los endpoints de **animales**, los cuales permiten registrar y listar los mismos.
+
+**_NOTA_**: tambien pueden tener varios permisos
+
+- **[ animales, actividades]** ➡️ acceso a esos determinados endpoints
+
+# ENDPOINTS
+
+### 🟢LOGIN ENDPOINT
+
+- `http://127.25.25.27:3300/auth/login` -->
+  Permite iniciar sesión en el proyecto, verificando que exista en la DB y creando tu token personal.
+
+```json
+// EJEMPLO LOGIN [admin]
+
+{
+  "email": "cavillafrades@gmail.com",
+  "password": "carlos123"
+}
+```
+
+### 🟢ANIMALES ENDPOINTS
+
+- **GET:** `http://127.25.25.27:3300/animales` --> Permite listar todos los animales del zoológico.
+- **GET:** `http://127.25.25.27:3300/animales/recinto/:recintoID` --> Permite listar todos los animales basado en su recinto ( **_recintoID_** ).
+- **GET:** `http://127.25.25.27:3300/animales/especie/:especieID` --> Permite listar todos los animales basado en su especie ( **_especieID_** ).
+- **GET:** `http://127.25.25.27:3300/animales/:animalID` --> Permite listar a un animal basado en su propio ID.
+- **POST:** `http://127.25.25.27:3300/animales` --> Permite crear y guardar un nuevo animal en la base de datos.
+
+```json
+// EJEMPLO ANIMALES
+{
+  "especie": {
+    "nombre": "delfines"
+  },
+  "edad": 10,
+  "recinto": {
+    "ID": 2,
+    "nombre": "delfinario"
+  },
+  "tipoAlimentacion": "carní­voro"
+}
+```
+
+### 🟢ACTIVIDADES ENDPOINTS
+
+- **GET:** `http://127.25.25.27:3300/actividades` --> Permite listar todas las actividades registradas.
+- **GET:** `http://127.25.25.27:3300/actividades/tipo/:tipoID` --> Permite todas las actividades basadas con su tipo (**_tipoID_**).
+- **GET:** `http://127.25.25.27:3300/actividades/fecha/:fecha` --> Permite todas las actividades basadas en su fecha (**_fecha_**).
+- **GET:** `http://127.25.25.27:3300/actividades/recinto/:recintoID` --> Permite todas las actividades basadas en el recinto donde se realizo (**_recintoID_**).
+- **POST:** `http://127.25.25.27:3300/actividades` --> Permite crear y registrar una nueva actividad en la base de datos
+
+```json
+// EJEMPLO ACTIVIDADES
+
+{
+  "tipoActividad": {
+    "ID": 2,
+    "nombre": "show"
+  },
+  "recinto": {
+    "ID": 2,
+    "nombre": "delfinario"
+  },
+  "descripcion": "Se realizo un show de delfines con zardinas como premio",
+  "empleado": {
+    "numDocumento": 1005371555,
+    "nombre": "Sara Angarita"
+  }
+}
+```
+
+### 🟢EMPLEADOS ENDPOINTS
+
+- **GET:** `http://127.25.25.27:3300/empleados` --> Permite listar todas los empleados registrados del zoológico.
+- **GET:** `http://127.25.25.27:3300/empleados/:empleadoID` --> Permite listar un empleado basado en su ID (**_empleadoID_**)
+- **GET:** `http://127.25.25.27:3300/empleados/cargo/:cargoNombre` --> Permite listar todos los empleados basado en el nombre de su cargo en el zoológico (**_cargoNombre_**), por ejemplo: "**_cuidador_**".
+- **POST:** `http://127.25.25.27:3300/empleados` --> Permite crear y registrar un nuevo empleado en el zoológico.
+
+```json
+// EJEMPLO EMPLEADOS
+
+{
+  "numDocumento": 1234567890,
+  "nombre": "William Angarita",
+  "cargo": {
+    "nombre": "cuidador",
+    "permisos": ["animales", "actividades"]
+  },
+  "telefono": "3124261084",
+  "email": "william@gmail.com",
+  "password": "williampwd"
+}
+```
+
+### 🟢COMENTARIOS ENDPOINTS
+
+- **GET:** `http://127.25.25.27:3300/comentarios` --> Permite listar todos los comentarios registrados.
+- **GET:** `http://127.25.25.27:3300/comentarios/:comentarioID` --> Permite listar un comentario basado en su ID (**_comentarioID_**)
+- **GET:** `http://127.25.25.27:3300/comentarios/visitante/:visitanteID` --> Permite listar un comentario basado en el visitante que lo realizo (**_visitanteID_**)
+- **GET:** `http://127.25.25.27:3300/comentarios/fecha/:fecha` --> Permite listar los comentarios realizados en determinada fecha (**_fecha_**)
+- **GET:** `http://127.25.25.27:3300/comentarios/populares:nDias` --> Permite listar los animales más populares en los ultimos N días (**_ndias_**)
+- **POST:** `http://127.25.25.27:3300/comentarios` --> Permite crear y registrar un nuevo comentario.
+
+```json
+// EJEMPLO COMENTARIOS
+
+{
+  "especieDestacado": { "ID": 2, "nombre": "delfines" },
+  "contenido": "SUPER BONITOS LOS DELFINES",
+  "calificacion": 5,
+  "visitante": {
+    "numDocumento": 1005184201,
+    "nombre": "Keanon Angarita Olarte"
+  }
+}
+```
 
 # LENGUAJES A UTILIZAR
 
