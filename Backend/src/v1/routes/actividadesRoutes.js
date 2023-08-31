@@ -10,7 +10,7 @@ const v1Actividades = Router();
 
 v1Actividades
   .get("/", actividadesController.getAllActivities)
-  .get("/tipoIdb/:tipoID", actividadesController.getActivitiesByType)
+  .get("/tipo/:tipoID", actividadesController.getActivitiesByType)
   .get("/fecha/:fecha", actividadesController.getActivitiesByDate)
   .get("/recinto/:recintoID", actividadesController.getActivityByClousure)
   .post(
