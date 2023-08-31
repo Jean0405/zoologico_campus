@@ -414,34 +414,21 @@ db.createCollection("comentarios", {
 //Importante tener en cuenta que cada vez que queramos agregar registros desde este archivo debemos seleccionar tambien la funcion de increment para que se agregue por defecto el ID.
 
 //Funcion IDAutoIncrementable
-// use("db_zoologico_campus");
-// function autoIncrementID(coleccion) {
-//   const sequenceDocument = db.contadores.findOneAndUpdate(
-//     { ID: `${coleccion}ID` },
-//     { $inc: { sequence_value: 1 } },
-//     { returnDocument: "after" }
-//   );
-//   return sequenceDocument.sequence_value;
-// }
-
-//ANIMALES
 use("db_zoologico_campus");
-db.comentarios.insertOne({
-  ID: 1,
-  especieDestacado: { ID: 2, nombre: "delfines" },
-  contenido: "SUPER SITIO",
-  calificacion: 5,
-  visitante: {
-    numDocumento: 1005184201,
-    nombre: "Keanon Angarita Olarte",
-  },
-  fecha: new Date("2023-10-10"),
-});
+function autoIncrementID(coleccion) {
+  const sequenceDocument = db.contadores.findOneAndUpdate(
+    { ID: `${coleccion}ID` },
+    { $inc: { sequence_value: 1 } },
+    { returnDocument: "after" }
+  );
+  return sequenceDocument.sequence_value;
+}
+
 
 use("db_zoologico_campus");
 db.animales.insertMany([
   {
-    ID: 1,
+    ID: autoIncrementID("animales"),
     especie: {
       ID: 2,
       nombre: "delfines",
@@ -454,7 +441,7 @@ db.animales.insertMany([
     tipoAlimentacion: "carnívoro",
   },
   {
-    ID: 2,
+    ID: autoIncrementID("animales"),
     especie: {
       ID: 1,
       nombre: "leones",
@@ -468,7 +455,7 @@ db.animales.insertMany([
     tipoAlimentacion: "carnívoro",
   },
   {
-    ID: 3,
+    ID: autoIncrementID("animales"),
     especie: {
       ID: 3,
       nombre: "simios",
@@ -482,11 +469,25 @@ db.animales.insertMany([
   },
 ]);
 
+//ANIMALES
+use("db_zoologico_campus");
+db.comentarios.insertOne({
+  ID: autoIncrementID("comentarios"),
+  especieDestacado: { ID: 2, nombre: "delfines" },
+  contenido: "SUPER SITIO",
+  calificacion: 5,
+  visitante: {
+    numDocumento: 1005184201,
+    nombre: "Keanon Angarita Olarte",
+  },
+  fecha: new Date("2023-10-10"),
+});
+
 //ACTIVIDADES;
 use("db_zoologico_campus");
 db.actividades.insertMany([
   {
-    ID: 1,
+    ID: autoIncrementID("actividades"),
     tipoActividad: {
       ID: 2,
       nombre: "show",
@@ -504,7 +505,7 @@ db.actividades.insertMany([
     },
   },
   {
-    ID: 2,
+    ID: autoIncrementID("actividades"),
     tipoActividad: {
       ID: 1,
       nombre: "alimentacion",
@@ -521,7 +522,7 @@ db.actividades.insertMany([
     },
   },
   {
-    ID: 3,
+    ID: autoIncrementID("actividades"),
     tipoActividad: {
       ID: 3,
       nombre: "mantenimiento",
