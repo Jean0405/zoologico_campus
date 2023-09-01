@@ -62,11 +62,28 @@ git clone https://github.com/Jean0405/zoologico_campus.git
   npm install
 ```
 
-**4**. Configura tus variables de entorno
+**4**. Obten el URL de tu base de
+![Alt text](./assets/image-2.png)
+![Alt text](./assets/image-8.png)
+![Alt text](./assets/image-9.png)
+
+- Abre la extensión de MONGO en Visual Studio Code y dale al '+' para agregar una nueva conexión.
+
+![Alt text](./assets/image-7.png)
+
+- Da en **Connect** para poder pegar tu URL, donde deberás poner la **contraseña** de tu MongoDB
+
+![Alt text](./assets/image-10.png)
+
+- Reemplaza este link por el **tuyo**, y pon las **variables de entorno** donde corresponde según la imagen de ejemplo
+
+![Alt text](./assets/image-11.png)
+
+**5**. Configura tus variables de entorno
 
 #### ⚠️ _Recuerda implementar tus propias variables de entorno_ ⚠️
 
-**NOTA**: Aunque la db debe llamarse "**_db_zoologico_campus_**", ya que es así como se llama la DB al ejecutar el archivo que crea las colecciones, sus schemas y algunos documentos ed ejemplo para las pruebas
+**NOTA**: Aunque la **DB** debe llamarse "**_db_zoologico_campus_**", ya que es así como se llama la DB al ejecutar el archivo que crea las colecciones, sus schemas y algunos documentos ed ejemplo para las pruebas
 
 ```env
 PORT=3300
@@ -79,11 +96,11 @@ DB="db_zoologico_campus"
 PRIVATE_KEY=
 ```
 
-**5**. ejecuta el archivo db/query.mongodb
+**6**. ejecuta el archivo db/query.mongodb
 
 Al clonar, podrás ejecutar del archivo **db/query.mongodb** para crear, relacionar e insertar los datos para pruebas de ejemplo.
 
-**6**. ejecuta el proyecto en la terminal
+**7**. ejecuta el proyecto en la terminal
 
 ```bash
 npm run dev
