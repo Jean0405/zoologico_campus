@@ -2,9 +2,10 @@ import "dotenv/config";
 import { database } from "../configuration/serverConfig.js";
 import { MongoClient } from "mongodb";
 
-// const URI = `mongodb+srv://${CONFIG.user}:${CONFIG.password}@practica.4b4nkjj.mongodb.net/${CONFIG.db}`;
-//mongodb+srv://${my_conexion.user}:${my_conexion.password}@cluster0.oj8cvn0.mongodb.net/
-const URI = `mongodb+srv://${database.USER}:${database.PASSWORD}@practica.4b4nkjj.mongodb.net/${database.DB}?retryWrites=true&w=majority`;
+//DEBES PONER EL LINK DE TU DB Y CAMBIAR LAS CONFIGURACIONES DE ELLA
+//USA ESTE EJEMPLO --> mongodb+srv://${database.USER}:${database.PASSWORD}@practica.4b4nkjj.mongodb.net/${database.DB}?retryWrites=true&w=majority
+
+const URI = `mongodb+srv://${database.USER}:${database.PASSWORD}@practica.4b4nkjj.mongodb.net/${database.DB}`;
 const OPTIONS = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
