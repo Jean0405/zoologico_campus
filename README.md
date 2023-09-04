@@ -203,6 +203,7 @@ Una vez que el Admin o algun empleado con permiso para registrarte lo haya hecho
 // EJEMPLO ANIMALES
 {
   "especie": {
+    "ID": 2,
     "nombre": "delfines"
   },
   "edad": 10,
@@ -210,7 +211,7 @@ Una vez que el Admin o algun empleado con permiso para registrarte lo haya hecho
     "ID": 2,
     "nombre": "delfinario"
   },
-  "tipoAlimentacion": "carní­voro"
+  "tipoAlimentacion": "carnívoro"
 }
 ```
 
