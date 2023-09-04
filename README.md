@@ -1,5 +1,27 @@
 # ZOOLOGICO CAMPUSLANDS
 
+- [Introducción](#introducción)
+- [Funcionamiento de un Zoológico](#funcionamiento-de-un-zoológico)
+- [Diagrama de la Base de Datos](#diagrama-de-la-base-de-datos)
+- [Requerimientos](#requerimientos)
+- [Instalación](#instalación)
+  - [Clonar el Repositorio](#clonar-el-repositorio)
+  - [Instalar Dependencias](#instalar-dependencias)
+  - [Configurar Variables de Entorno](#configurar-variables-de-entorno)
+  - [Cargar Datos de Ejemplo](#cargar-datos-de-ejemplo)
+  - [Ejecutar el Proyecto](#ejecutar-el-proyecto)
+- [Indicaciones](#indicaciones)
+  - [Inicio de Sesión y Registro](#inicio-de-sesión-y-registro)
+  - [Tokens](#tokens)
+  - [Permisos](#permisos)
+- [Endpoints](#endpoints)
+  - [Login Endpoint](#login-endpoint)
+  - [Animales Endpoints](#animales-endpoints)
+  - [Actividades Endpoints](#actividades-endpoints)
+  - [Empleados Endpoints](#empleados-endpoints)
+  - [Comentarios Endpoints](#comentarios-endpoints)
+- [Lenguajes a utilizar](#lenguajes-a-utilizar)
+
 ![zoo](./assets/banner.png)
 
 Un zoológico es un lugar donde animales salvajes de forma dividida por recintos. El proposito general de estos es educar a la población, dar el espacio para esparcimiento del público, estudiar y/o preservar las especies.
@@ -123,7 +145,7 @@ npm run dev
 **NOTA**: Una vez obtienes un token debes ponerlo en el **_HEADER_** de las solicitudes, por ejemplo:
 
 Authorization: **tu_Token_Obtenido**
-![Authorization Header](image.png)
+![Alt text](image.png)
 
 ### 🛂 PERMISOS
 
@@ -181,6 +203,7 @@ Una vez que el Admin o algun empleado con permiso para registrarte lo haya hecho
 // EJEMPLO ANIMALES
 {
   "especie": {
+    "ID": 2,
     "nombre": "delfines"
   },
   "edad": 10,
@@ -188,7 +211,7 @@ Una vez que el Admin o algun empleado con permiso para registrarte lo haya hecho
     "ID": 2,
     "nombre": "delfinario"
   },
-  "tipoAlimentacion": "carní­voro"
+  "tipoAlimentacion": "carnívoro"
 }
 ```
 

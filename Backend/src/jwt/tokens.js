@@ -24,7 +24,7 @@ export const generateToken = async (info) => {
 export const validateToken = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization)
-    return res.status(401).send({ token: "NON-EXISTENT OR EXPIRED TOKEN" });
+    return res.status(401).send({ token: "token no existe o ha caducado" });
   try {
     const encoder = new TextEncoder();
     req.auth = await jwtVerify(
