@@ -1,0 +1,590 @@
+//CONTADOR AUTOINCREMENTABLE
+use("db_zoologico_campus");
+db.createCollection("contadores");
+db.contadores.insertMany([
+  { ID: "animalesID", sequence_value: 0 },
+  { ID: "recintosID", sequence_value: 0 },
+  { ID: "tipoHabitatID", sequence_value: 0 },
+  { ID: "actividadesID", sequence_value: 0 },
+  { ID: "tipoActividadID", sequence_value: 0 },
+  { ID: "comentariosID", sequence_value: 0 },
+  { ID: "especieID", sequence_value: 0 },
+]);
+
+use("db_zoologico_campus");
+db.createCollection("animales", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["especie", "edad", "recinto", "tipoAlimentacion"],
+      properties: {
+        _id: {
+          bsonType: "objectId",
+        },
+        ID: {
+          bsonType: "int",
+        },
+        especie: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["ID", "nombre"],
+          properties: {
+            ID: {
+              bsonType: "int",
+              description: "El campo 'ID' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 50,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+            },
+          },
+        },
+        nombre: {
+          bsonType: "string",
+          maxLength: 50,
+          description:
+            "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+        },
+        edad: {
+          bsonType: "int",
+          minimum: 0,
+          maximum: 500,
+          description:
+            "El campo 'edad' debe ser un int y no sobrepasar [3]caracteres",
+        },
+        recinto: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["ID", "nombre"],
+          properties: {
+            ID: {
+              bsonType: "int",
+              description: "El campo 'ID' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 50,
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+            },
+          },
+        },
+        tipoAlimentacion: {
+          bsonType: "string",
+          enum: ["carnívoro", "herbívoro", "omnívoro"],
+          description:
+            "El campo 'tipoAlimentacion' debe ser un string, no sobrepasar [15]caracteres,  valores permitidos[carnívoro,herbívoro,omnívoro]",
+        },
+      },
+    },
+  },
+});
+
+use("db_zoologico_campus");
+db.createCollection("recintos", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["nombre", "zona", "tipoHabitat"],
+      properties: {
+        _id: {
+          bsonType: "objectId",
+        },
+        ID: {
+          bsonType: "int",
+        },
+        nombre: {
+          bsonType: "string",
+          maxLength: 50,
+          description:
+            "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+        },
+        descripcion: {
+          bsonType: "string",
+          maxLength: 200,
+          description:
+            "El campo 'descripcion' debe ser un string y no sobrepasar [200]caracteres",
+        },
+        zona: {
+          bsonType: "string",
+          enum: ["norte", "sur", "este", "oeste"],
+          description:
+            "El campo 'zona' debe ser un string, valores permitidos[norte,sur,este,oeste]",
+        },
+        tipoHabitat: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["ID", "nombre"],
+          properties: {
+            ID: {
+              bsonType: "int",
+              description: "El campo 'ID' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 50,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+            },
+          },
+        },
+      },
+    },
+  },
+});
+
+use("db_zoologico_campus");
+db.createCollection("actividades", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["tipoActividad", "recinto", "empleado"],
+      properties: {
+        _id: {
+          bsonType: "objectId",
+        },
+        ID: {
+          bsonType: "int",
+        },
+        tipoActividad: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["ID", "nombre"],
+          properties: {
+            ID: {
+              bsonType: "int",
+              description: "El campo 'ID' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 50,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+            },
+          },
+        },
+        recinto: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["ID", "nombre"],
+          properties: {
+            ID: {
+              bsonType: "int",
+              description: "El campo 'ID' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 50,
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+            },
+          },
+        },
+        descripcion: {
+          bsonType: "string",
+          maxLength: 300,
+          description:
+            "El campo 'descripcion' debe ser un string y no sobrepasar [300]caracteres",
+        },
+        fecha: {
+          bsonType: "date",
+          description: "El campo 'fecha' tipo date",
+        },
+        empleado: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["numDocumento", "nombre"],
+          properties: {
+            numDocumento: {
+              bsonType: "int",
+              description:
+                "El campo 'numDocumento' debe ser un int y no sobre pasar los 11 caracteres",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 60,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres",
+            },
+          },
+        },
+      },
+    },
+  },
+});
+
+use("db_zoologico_campus");
+db.createCollection("empleado", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: [
+        "numDocumento",
+        "nombre",
+        "cargo",
+        "telefono",
+        "email",
+        "password",
+      ],
+      properties: {
+        _id: {
+          bsonType: "objectId",
+        },
+        numDocumento: {
+          bsonType: "int",
+          description:
+            "El campo 'numDocumento' debe ser un int y no sobre pasar los 11 caracteres",
+        },
+        nombre: {
+          bsonType: "string",
+          maxLength: 60,
+          pattern: "^[a-zA-Z ]+$",
+          description:
+            "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres",
+        },
+        cargo: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["nombre", "permisos"],
+          properties: {
+            nombre: {
+              bsonType: "string",
+              maxLength: 50,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [50]caracteres",
+            },
+            permisos: {
+              bsonType: "array",
+            },
+          },
+        },
+        telefono: {
+          bsonType: "string",
+          maxLength: 10,
+          pattern: "^[0-9]+$",
+          description:
+            "El campo 'telefono' debe ser un string, solo acepta numero y no sobrepasar [10]caracteres",
+        },
+        email: {
+          bsonType: "string",
+          maxLength: 60,
+          pattern: "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑüÜ,.#_@\\s-]+$",
+          description:
+            "El campo 'email' debe ser un string y no sobrepasar [60] caracteres",
+        },
+        password: {
+          bsonType: "string",
+          maxLength: 20,
+          description:
+            "El campo 'telefono' debe ser un string, solo acepta numero y no sobrepasar [10] caracteres",
+        },
+      },
+    },
+  },
+});
+
+use("db_zoologico_campus");
+db.createCollection("visitantes", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["numDocumento", "nombre", "edad"],
+      properties: {
+        _id: {
+          bsonType: "objectId",
+        },
+        numDocumento: {
+          bsonType: "int",
+          description:
+            "El campo 'numDocumento' debe ser un int y no sobre pasar los 11 caracteres",
+        },
+        nombre: {
+          bsonType: "string",
+          maxLength: 60,
+          pattern: "^[a-zA-Z ]+$",
+          description:
+            "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres",
+        },
+        edad: {
+          bsonType: "int",
+          minimum: 1,
+          maximum: 110,
+          description: "El campo 'edad' debe ser un int entre[1-110]",
+        },
+        pais: {
+          bsonType: "string",
+          maxLength: 30,
+          pattern: "^[a-zA-Z ]+$",
+          description:
+            "El campo 'pais' debe ser un string y no sobrepasar [30]caracteres",
+        },
+        fecha_visita: {
+          bsonType: "date",
+          description: "El campo 'fecha_visita' tipo date",
+        },
+      },
+    },
+  },
+});
+
+use("db_zoologico_campus");
+db.createCollection("comentarios", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      additionalProperties: false,
+      required: ["calificacion", "visitante", "fecha"],
+      properties: {
+        _id: {
+          bsonType: "objectId",
+        },
+        ID: {
+          bsonType: "int",
+        },
+        especieDestacado: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["ID", "nombre"],
+          properties: {
+            ID: {
+              bsonType: "int",
+              description: "El campo 'ID' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 30,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [30]caracteres",
+            },
+          },
+        },
+        contenido: {
+          bsonType: "string",
+          maxLength: 100,
+          description:
+            "El campo 'contenido' debe ser un string y no sobre pasar [100]caracteres",
+        },
+        calificacion: {
+          bsonType: "int",
+          minimum: 1,
+          maximum: 5,
+          description: "El campo 'calificacion' debe ser un int entre[1-5]",
+        },
+        visitante: {
+          bsonType: "object",
+          additionalProperties: false,
+          required: ["numDocumento", "nombre"],
+          properties: {
+            numDocumento: {
+              bsonType: "int",
+              description: "El campo 'numDocumento' debe ser un int",
+            },
+            nombre: {
+              bsonType: "string",
+              maxLength: 60,
+              pattern: "^[a-zA-Z ]+$",
+              description:
+                "El campo 'nombre' debe ser un string y no sobrepasar [60]caracteres",
+            },
+          },
+        },
+        fecha: {
+          bsonType: "date",
+          description: "El campo 'fecha' tipo date",
+        },
+      },
+    },
+  },
+});
+
+//AGREGAR DATOS
+//Importante tener en cuenta que cada vez que queramos agregar registros desde este archivo debemos seleccionar tambien la funcion de increment para que se agregue por defecto el ID.
+
+//Funcion IDAutoIncrementable
+use("db_zoologico_campus");
+function autoIncrementID(coleccion) {
+  const sequenceDocument = db.contadores.findOneAndUpdate(
+    { ID: `${coleccion}ID` },
+    { $inc: { sequence_value: 1 } },
+    { returnDocument: "after" }
+  );
+  return sequenceDocument.sequence_value;
+}
+
+
+use("db_zoologico_campus");
+db.animales.insertMany([
+  {
+    ID: autoIncrementID("animales"),
+    especie: {
+      ID: 2,
+      nombre: "delfines",
+    },
+    edad: 1,
+    recinto: {
+      ID: 2,
+      nombre: "delfinario",
+    },
+    tipoAlimentacion: "carnívoro",
+  },
+  {
+    ID: autoIncrementID("animales"),
+    especie: {
+      ID: 1,
+      nombre: "leones",
+    },
+    nombre: "El rey Charles",
+    edad: 5,
+    recinto: {
+      ID: 1,
+      nombre: "savana",
+    },
+    tipoAlimentacion: "carnívoro",
+  },
+  {
+    ID: autoIncrementID("animales"),
+    especie: {
+      ID: 3,
+      nombre: "simios",
+    },
+    edad: 8,
+    recinto: {
+      ID: 3,
+      nombre: "selva tropical",
+    },
+    tipoAlimentacion: "omnívoro",
+  },
+]);
+
+//ANIMALES
+use("db_zoologico_campus");
+db.comentarios.insertOne({
+  ID: autoIncrementID("comentarios"),
+  especieDestacado: { ID: 2, nombre: "delfines" },
+  contenido: "SUPER SITIO",
+  calificacion: 5,
+  visitante: {
+    numDocumento: 1005184201,
+    nombre: "Keanon Angarita Olarte",
+  },
+  fecha: new Date("2023-10-10"),
+});
+
+//ACTIVIDADES;
+use("db_zoologico_campus");
+db.actividades.insertMany([
+  {
+    ID: autoIncrementID("actividades"),
+    tipoActividad: {
+      ID: 2,
+      nombre: "show",
+    },
+    recinto: {
+      ID: 2,
+      nombre: "delfinario",
+    },
+    descripcion:
+      "Se realizo un show de delfines en el recinto de delfines DELFINARIO",
+    fecha: new Date("2023-05-15"),
+    empleado: {
+      numDocumento: 1005371555,
+      nombre: "Sara Angarita",
+    },
+  },
+  {
+    ID: autoIncrementID("actividades"),
+    tipoActividad: {
+      ID: 1,
+      nombre: "alimentacion",
+    },
+    recinto: {
+      ID: 1,
+      nombre: "savana",
+    },
+    descripcion: "alimentar los leones",
+    fecha: new Date("2023-11-05"),
+    empleado: {
+      numDocumento: 1234567890,
+      nombre: "William Angarita",
+    },
+  },
+  {
+    ID: autoIncrementID("actividades"),
+    tipoActividad: {
+      ID: 3,
+      nombre: "mantenimiento",
+    },
+    recinto: {
+      ID: 3,
+      nombre: "selva tropical",
+    },
+    descripcion: "se siembra nueva vegetación en el recinto",
+    fecha: new Date("2023-09-02"),
+    empleado: {
+      numDocumento: 1005371571,
+      nombre: "Cristian Diaz",
+    },
+  },
+]);
+
+// EMPLEADO
+use("db_zoologico_campus");
+db.empleado.insertMany([
+  {
+    numDocumento: 1004952256,
+    nombre: "Carlos Villafrades",
+    cargo: {
+      nombre: "gerente",
+      permisos: ["*"],
+    },
+    telefono: "3238884306",
+    email: "cavillafrades@gmail.com",
+    password: "carlos123",
+  },
+  {
+    numDocumento: 1005371571,
+    nombre: "Cristian Diaz",
+    cargo: {
+      nombre: "mantenimiento",
+      permisos: ["actividades"],
+    },
+    telefono: "3123123121",
+    email: "cristian@gmail.com",
+    password: "cristian123",
+  },
+  {
+    numDocumento: 1234567890,
+    nombre: "William Angarita",
+    cargo: {
+      nombre: "cuidador",
+      permisos: ["animales", "actividades"],
+    },
+    telefono: "3124261084",
+    email: "william@gmail.com",
+    password: "williampwd",
+  },
+  {
+    numDocumento: 1005371555,
+    nombre: "Sara Angarita",
+    cargo: {
+      nombre: "entrenador",
+      permisos: ["animales", "actividades"],
+    },
+    telefono: "3123123121",
+    email: "cristian@gmail.com",
+    password: "cristian123",
+  },
+]);
