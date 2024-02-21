@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start":"node ./Backend/src/app.js",
     "dev": "nodemon --quiet ./Backend/src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
